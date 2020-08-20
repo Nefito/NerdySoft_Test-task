@@ -23,8 +23,10 @@ class AnnouncementDetail extends Component {
 
     render() {
         return (
-            <div className="row">
-                {this.renderAnn(this.props.selectedAnn)}
+            <div className="container">
+                <div className="row">
+                    {this.renderAnn(this.props.selectedAnn)}
+                </div>
             </div>
         );
     }
