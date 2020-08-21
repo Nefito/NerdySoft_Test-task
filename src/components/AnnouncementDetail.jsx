@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Card, CardHeader, CardText, CardBody, CardFooter } from 'reactstrap';
 
-class AnnouncementDetail extends Component {
-    renderAnn(ann) {
+function RenderAnn({ann}) {
         if (ann != null) {
             return (
                 <Card className="text-center">
@@ -21,15 +20,14 @@ class AnnouncementDetail extends Component {
         }
     }
 
-    render() {
-        return (
-            <div className="container">
-                <div className="row">
-                    {this.renderAnn(this.props.selectedAnn)}
-                </div>
+const AnnouncementDetail = (props) => {
+    return (
+        <div className="container">
+            <div className="row">
+                <RenderAnn ann={props.ann} />
             </div>
-        );
-    }
+        </div>
+    );
 }
 
 export default AnnouncementDetail;

@@ -27,7 +27,7 @@ class Main extends Component {
                     </div>
                 </Navbar>
                 <Home announcements={this.state.announcements} onClick={(annId) => this.onAnnSelect(annId)} />
-                <AnnouncementDetail ann={this.state.announcements.filter((ann) => ann.id = this.state.selectedAnn)[0]} />
+                <AnnouncementDetail ann={this.state.announcements.filter((ann) => ann.ID === this.state.selectedAnn)[0]} />
             </div>
         );
     }
