@@ -3,6 +3,7 @@ import { Navbar, NavbarBrand } from 'reactstrap';
 import Home from './HomeComponent';
 import AnnouncementDetail from './AnnouncementDetail';
 import { ANNOUNCEMENTS } from '../shared/announcements';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 class Main extends Component {
     constructor(props) {
@@ -10,15 +11,17 @@ class Main extends Component {
 
         this.state = {
             announcements: ANNOUNCEMENTS,
-            selectedAnn: null
         };
     }
 
-    onAnnSelect(annId) {
-        this.setState({ selectedAnn: annId });
-    }
-
     render() {
+
+        const AnnWithId = ({match}) => {
+            return (
+                <AnnouncementDetail ann={this.state.announcements.filter((ann) => ann.ID === parseInt(match.params.annId, 10))[0]} />
+            );
+        }
+
         return (
             <div>
                 <Navbar dark color="primary">
@@ -26,8 +29,10 @@ class Main extends Component {
                         <NavbarBrand href="/">Announcement Website</NavbarBrand>
                     </div>
                 </Navbar>
-                <Home announcements={this.state.announcements} onClick={(annId) => this.onAnnSelect(annId)} />
-                <AnnouncementDetail ann={this.state.announcements.filter((ann) => ann.ID === this.state.selectedAnn)[0]} />
+                <Switch>
+                    <Route path="/home" component={() => <Home announcements={this.state.announcements} /> } />
+                    <Route path="/announcement/:annId" component={AnnWithId} />
+                </Switch>
             </div>
         );
     }

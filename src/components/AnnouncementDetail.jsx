@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card, CardHeader, CardText, CardBody, CardFooter } from 'reactstrap';
+import { Card, CardHeader, CardText, CardBody, CardFooter, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 function RenderAnn({ann}) {
         if (ann != null) {
@@ -24,6 +25,12 @@ const AnnouncementDetail = (props) => {
     return (
         <div className="container">
             <div className="row">
+                <Breadcrumb>
+                    <BreadcrumbItem>
+                        <Link to="/home">Home</Link>
+                    </BreadcrumbItem>
+                    <BreadcrumbItem active>{props.ann.title}</BreadcrumbItem>
+                </Breadcrumb>
                 <RenderAnn ann={props.ann} />
             </div>
         </div>
