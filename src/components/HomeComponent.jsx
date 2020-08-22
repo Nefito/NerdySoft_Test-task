@@ -40,13 +40,14 @@ class AddAnnouncement extends Component {
                     </div>
                 );
             }
+            return null;
         });
 
         return (
             <>
                 <div>
-                    <Button className="mt-3" outline onClick={this.toggleModal}>
-                        <span className="fa fa-plus" /> Add an Announcement
+                    <Button className="mt-3" outline color="primary" onClick={this.toggleModal}>
+                        <span className="fa fa-plus"/> Add an Announcement
                     </Button>
                     <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                         <ModalHeader toggle={this.toggleModal}>Add an Announcement</ModalHeader>
@@ -75,7 +76,14 @@ function RenderHomeItem({ann}) {
     return (
         <Card className="text-center">
             <Link to={`/announcement/${ann.ID}`} style={{ textDecoration: 'none', color: 'black'}}>
-                <CardHeader tag="h3">{ann.title}</CardHeader>
+                <CardHeader tag="h3">
+                    <Button className="float-right ml-1" outline color="danger">
+                        <span className="fa fa-trash" />
+                    </Button>
+                    <Button className="float-right" outline>
+                        <span className="fa fa-pencil" />
+                    </Button>
+                    {ann.title}</CardHeader>
                 <CardBody>
                     <CardText>{ann.description}</CardText>
                 </CardBody>
@@ -95,6 +103,7 @@ const Home = (props) => {
                 </div>
             );
         }
+        return null;
     });
     return (
         <div className="container">
