@@ -31,8 +31,8 @@ const AnnouncementDetail = (props) => {
                     </BreadcrumbItem>
                     <BreadcrumbItem active>{props.ann.title}</BreadcrumbItem>
                 </Breadcrumb>
-                <RenderAnn ann={props.ann} />
             </div>
+            <RenderAnn ann={props.ann} />
         </div>
     );
 }
