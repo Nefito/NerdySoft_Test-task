@@ -26,17 +26,18 @@ class AddAnnouncement extends Component {
             ID: this.props.announcements.length,
             title: this.title.value,
             description: this.description.value,
-            date: new Date()
+            date: new Date(),
+            show: true
         });
     }
 
     render() {
 
         const new_ann_list = this.props.announcements.map((ann) => {
-            if (ann.ID > 2) {
+            if (ann.show && ann.ID > 2) {
                 return (
-                    <div className="mt-5" key={ann.ID}>
-                        <RenderHomeItem ann={ann} />
+                    <div className="row">
+                    <RenderHomeItem ann={ann} />
                     </div>
                 );
             }
@@ -72,35 +73,56 @@ class AddAnnouncement extends Component {
     }
 }
 
-function RenderHomeItem({ann}) {
-    return (
-        <Card className="text-center">
-            <Link to={`/announcement/${ann.ID}`} style={{ textDecoration: 'none', color: 'black'}}>
-                <CardHeader tag="h3">
-                    <Button className="float-right ml-1" outline color="danger">
-                        <span className="fa fa-trash" />
-                    </Button>
-                    <Button className="float-right" outline>
-                        <span className="fa fa-pencil" />
-                    </Button>
-                    {ann.title}</CardHeader>
-                <CardBody>
-                    <CardText>{ann.description}</CardText>
-                </CardBody>
-                <CardFooter className="text-muted text-right">Posted on {ann.date.toDateString()}</CardFooter>
-            </Link>
-        </Card>
-    );
+class RenderHomeItem extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            showItem: this.props.ann.show
+        };
+        this.hideItem = this.hideItem.bind(this);
+    }
+    hideItem() {
+        this.props.ann.show = false;
+        this.setState({showItem: false});
+    }
+    render() {
+        if(this.props.ann.show){
+            return (
+                <div className="col-12 mt-5" key={this.props.ann.ID}>
+                    <Card className="text-center">
+                        <CardHeader tag="h3">
+                            <Button className="float-right ml-1" outline color="danger" onClick={() => this.hideItem()}>
+                                <span className="fa fa-trash" />
+                            </Button>
+                            <Button className="float-right" outline>
+                                <span className="fa fa-pencil" />
+                            </Button>
+                            <Link to={`/announcement/${this.props.ann.ID}`} style={{ textDecoration: 'none', color: 'black'}}>
+                                {this.props.ann.title}
+                            </Link>
+                        </CardHeader>
+                        <Link to={`/announcement/${this.props.ann.ID}`} style={{ textDecoration: 'none', color: 'black'}}>
+                            <CardBody>
+                                <CardText>{this.props.ann.description}</CardText>
+                            </CardBody>
+                            <CardFooter className="text-muted text-right">Posted on {this.props.ann.date.toDateString()}</CardFooter>
+                        </Link>
+                    </Card>
+                </div>
+            );
+        }
+        else{
+            return(null)
+        }
+    }
 }
 
 const Home = (props) => {
-
     const ann_list = props.announcements.map((ann) => {
-        if(ann.ID < 3) {
+        if(ann.show && ann.ID < 3) {
             return (
-                <div className="col-12 mt-5" key={ann.ID}>
-                    <RenderHomeItem ann={ann} />
-                </div>
+                <RenderHomeItem ann={ann}  />
             );
         }
         return null;

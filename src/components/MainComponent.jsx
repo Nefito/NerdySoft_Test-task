@@ -24,7 +24,7 @@ class Main extends Component {
 
         return (
             <div>
-                <Navbar dark color="primary">
+                <Navbar dark color="secondary">
                     <div className="container">
                         <NavbarBrand href="/">Announcement Website</NavbarBrand>
                     </div>
