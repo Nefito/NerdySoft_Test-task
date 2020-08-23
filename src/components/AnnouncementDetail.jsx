@@ -10,7 +10,8 @@ function RenderAnn({ann}) {
                     <CardBody>
                         <CardText>{ann.description}</CardText>
                     </CardBody>
-                    <CardFooter className="text-muted text-right">Posted on {ann.date.toDateString()}</CardFooter>
+                    <CardFooter className="text-muted text-right">{ann.edited?<i>Edited </i>: null }
+                        Posted on {ann.date.toDateString()}</CardFooter>
                 </Card>
             );
         }

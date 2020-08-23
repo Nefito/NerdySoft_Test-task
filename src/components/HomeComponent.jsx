@@ -78,14 +78,33 @@ class RenderHomeItem extends Component {
         super(props);
 
         this.state = {
-            showItem: this.props.ann.show
+            showItem: this.props.ann.show,
+            isModalOpen: false
         };
         this.hideItem = this.hideItem.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
     }
+
+    toggleModal() {
+        this.setState({
+          isModalOpen: !this.state.isModalOpen
+        });
+    }
+
     hideItem() {
         this.props.ann.show = false;
         this.setState({showItem: false});
     }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        this.toggleModal();
+        this.props.ann.edited = true;
+        this.props.ann.title = this.title.value;
+        this.props.ann.description = this.description.value;
+    }
+
     render() {
         if(this.props.ann.show){
             return (
@@ -95,7 +114,7 @@ class RenderHomeItem extends Component {
                             <Button className="float-right ml-1" outline color="danger" onClick={() => this.hideItem()}>
                                 <span className="fa fa-trash" />
                             </Button>
-                            <Button className="float-right" outline>
+                            <Button className="float-right" outline onClick={() => this.toggleModal()}>
                                 <span className="fa fa-pencil" />
                             </Button>
                             <Link to={`/announcement/${this.props.ann.ID}`} style={{ textDecoration: 'none', color: 'black'}}>
@@ -106,9 +125,27 @@ class RenderHomeItem extends Component {
                             <CardBody>
                                 <CardText>{this.props.ann.description}</CardText>
                             </CardBody>
-                            <CardFooter className="text-muted text-right">Posted on {this.props.ann.date.toDateString()}</CardFooter>
+                            <CardFooter className="text-muted text-right">{this.props.ann.edited?<i>Edited </i>: null }
+                                Posted on {this.props.ann.date.toDateString()}</CardFooter>
                         </Link>
                     </Card>
+                    <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+                        <ModalHeader toggle={this.toggleModal}>Edit Announcement</ModalHeader>
+                        <ModalBody>
+                            <Form onSubmit={this.handleSubmit}>
+                                <FormGroup>
+                                    <Label htmlFor="title">Title</Label>
+                                    <Input type="text" id="title" name="title" innerRef={(input) => this.title=input} placeholder={this.props.ann.title}/>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label htmlFor="description">Description</Label>
+                                    <Input type="textarea" id="description" name="description" innerRef={(input) => this.description=input}
+                                        placeholder={this.props.ann.description} />
+                                </FormGroup>
+                                <Button type="submit" value="submit" color="primary">Edit</Button>
+                            </Form>
+                        </ModalBody>
+                    </Modal>
                 </div>
             );
         }
