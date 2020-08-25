@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Header from './HeaderComponent';
-import Home from './HomeComponent';
 import AnnouncementDetail from './AnnouncementDetail';
 import { ANNOUNCEMENTS } from '../shared/announcements';
 import { Switch, Route, Redirect } from 'react-router-dom';
@@ -18,7 +17,8 @@ class Main extends Component {
 
         const AnnWithId = ({match}) => {
             return (
-                <AnnouncementDetail ann={this.state.announcements.filter((ann) => ann.ID === parseInt(match.params.annId, 10))[0]} />
+                <AnnouncementDetail  announcements={this.state.announcements}
+                    ann={this.state.announcements.filter((ann) => ann.ID === parseInt(match.params.annId, 10))[0]} />
             );
         }
 
