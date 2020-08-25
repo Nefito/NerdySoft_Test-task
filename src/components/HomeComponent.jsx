@@ -135,12 +135,12 @@ class RenderHomeItem extends Component {
                             <Form onSubmit={this.handleSubmit}>
                                 <FormGroup>
                                     <Label htmlFor="title">Title</Label>
-                                    <Input type="text" id="title" name="title" innerRef={(input) => this.title=input} placeholder={this.props.ann.title}/>
+                                    <Input type="text" id="title" name="title" innerRef={(input) => this.title=input} defaultValue={this.props.ann.title}/>
                                 </FormGroup>
                                 <FormGroup>
                                     <Label htmlFor="description">Description</Label>
                                     <Input type="textarea" id="description" name="description" innerRef={(input) => this.description=input}
-                                        placeholder={this.props.ann.description} />
+                                        defaultValue={this.props.ann.description} />
                                 </FormGroup>
                                 <Button type="submit" value="submit" color="primary">Edit</Button>
                             </Form>
@@ -149,9 +149,7 @@ class RenderHomeItem extends Component {
                 </div>
             );
         }
-        else{
-            return(null)
-        }
+        return(null);
     }
 }
 
@@ -159,7 +157,7 @@ const Home = (props) => {
     const ann_list = props.announcements.map((ann) => {
         if(ann.show && ann.ID < 3) {
             return (
-                <RenderHomeItem ann={ann}  />
+                <RenderHomeItem ann={ann} />
             );
         }
         return null;

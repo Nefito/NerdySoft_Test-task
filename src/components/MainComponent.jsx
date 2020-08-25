@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand } from 'reactstrap';
+import Header from './HeaderComponent';
 import Home from './HomeComponent';
 import AnnouncementDetail from './AnnouncementDetail';
 import { ANNOUNCEMENTS } from '../shared/announcements';
@@ -24,11 +24,7 @@ class Main extends Component {
 
         return (
             <div>
-                <Navbar dark color="secondary">
-                    <div className="container">
-                        <NavbarBrand href="/">Announcement Website</NavbarBrand>
-                    </div>
-                </Navbar>
+                <Header announcements={this.state.announcements}/>
                 <Switch>
                     <Route path="/home" component={() => <Home announcements={this.state.announcements} /> } />
                     <Route path="/announcement/:annId" component={AnnWithId} />
