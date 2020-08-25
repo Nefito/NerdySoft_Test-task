@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/NerdySoft_Test-Task/static/css/main.27fd15f6.chunk.css",
+    "main.js": "/NerdySoft_Test-Task/static/js/main.5a3f7231.chunk.js",
+    "main.js.map": "/NerdySoft_Test-Task/static/js/main.5a3f7231.chunk.js.map",
+    "runtime-main.js": "/NerdySoft_Test-Task/static/js/runtime-main.f33331cf.js",
+    "runtime-main.js.map": "/NerdySoft_Test-Task/static/js/runtime-main.f33331cf.js.map",
+    "static/css/2.f636f832.chunk.css": "/NerdySoft_Test-Task/static/css/2.f636f832.chunk.css",
+    "static/js/2.0c93f683.chunk.js": "/NerdySoft_Test-Task/static/js/2.0c93f683.chunk.js",
+    "static/js/2.0c93f683.chunk.js.map": "/NerdySoft_Test-Task/static/js/2.0c93f683.chunk.js.map",
+    "index.html": "/NerdySoft_Test-Task/index.html",
+    "precache-manifest.495aa34f287c9848e7c70f1e62692c97.js": "/NerdySoft_Test-Task/precache-manifest.495aa34f287c9848e7c70f1e62692c97.js",
+    "service-worker.js": "/NerdySoft_Test-Task/service-worker.js",
+    "static/css/2.f636f832.chunk.css.map": "/NerdySoft_Test-Task/static/css/2.f636f832.chunk.css.map",
+    "static/css/main.27fd15f6.chunk.css.map": "/NerdySoft_Test-Task/static/css/main.27fd15f6.chunk.css.map",
+    "static/js/2.0c93f683.chunk.js.LICENSE.txt": "/NerdySoft_Test-Task/static/js/2.0c93f683.chunk.js.LICENSE.txt",
+    "static/media/font-awesome.css": "/NerdySoft_Test-Task/static/media/fontawesome-webfont.fee66e71.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f33331cf.js",
+    "static/css/2.f636f832.chunk.css",
+    "static/js/2.0c93f683.chunk.js",
+    "static/css/main.27fd15f6.chunk.css",
+    "static/js/main.5a3f7231.chunk.js"
+  ]
+}
