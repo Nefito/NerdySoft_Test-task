@@ -24,9 +24,8 @@ class Main extends Component {
 
         return (
             <div>
-                <Header announcements={this.state.announcements}/>
                 <Switch>
-                    <Route path="/home" component={() => <Home announcements={this.state.announcements} /> } />
+                    <Route path="/home" component={() => <Header announcements={this.state.announcements} /> } />
                     <Route path="/announcement/:annId" component={AnnWithId} />
                     <Redirect to="/home" />
                 </Switch>

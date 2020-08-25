@@ -149,7 +149,7 @@ class RenderHomeItem extends Component {
                 </div>
             );
         }
-        return(null);
+        return null;
     }
 }
 
