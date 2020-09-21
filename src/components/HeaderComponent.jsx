@@ -51,7 +51,7 @@ class Header extends Component {
                         </Form>
                     </div>
                 </Navbar>
-                <Home announcements={this.state.filtered} />
+                <Home />
             </>
         );
     }

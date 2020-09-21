@@ -1,77 +1,8 @@
 import React, { Component } from 'react';
 import { Card, CardHeader, CardText, CardBody, CardFooter, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
-
-class AddAnnouncement extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            isModalOpen: false
-        };
-        this.toggleModal = this.toggleModal.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    toggleModal() {
-        this.setState({
-          isModalOpen: !this.state.isModalOpen
-        });
-    }
-
-    handleSubmit(event) {
-        event.preventDefault();
-        this.toggleModal();
-        this.props.announcements.push({
-            ID: this.props.announcements.length,
-            title: this.title.value,
-            description: this.description.value,
-            date: new Date(),
-            show: true
-        });
-    }
-
-    render() {
-
-        const new_ann_list = this.props.announcements.map((ann) => {
-            if (ann.show && ann.ID > 2) {
-                return (
-                    <div className="row">
-                    <RenderHomeItem ann={ann} />
-                    </div>
-                );
-            }
-            return null;
-        });
-
-        return (
-            <>
-                <div>
-                    <Button className="mt-3" outline color="primary" onClick={this.toggleModal}>
-                        <span className="fa fa-plus"/> Add an Announcement
-                    </Button>
-                    <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-                        <ModalHeader toggle={this.toggleModal}>Add an Announcement</ModalHeader>
-                        <ModalBody>
-                            <Form onSubmit={this.handleSubmit}>
-                                <FormGroup>
-                                    <Label htmlFor="title">Title</Label>
-                                    <Input type="text" id="title" name="title" innerRef={(input) => this.title=input} />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label htmlFor="description">Description</Label>
-                                    <Input type="textarea" id="description" name="description" innerRef={(input) => this.description=input} />
-                                </FormGroup>
-                                <Button type="submit" value="submit" color="primary">Submit</Button>
-                            </Form>
-                        </ModalBody>
-                    </Modal>
-                </div>
-                {new_ann_list}
-            </>
-        );
-    }
-}
+import { useSelector } from 'react-redux'
+import AddAnnouncement from './AddAnnouncement';
 
 class RenderHomeItem extends Component {
     constructor(props) {
@@ -153,8 +84,10 @@ class RenderHomeItem extends Component {
     }
 }
 
-const Home = (props) => {
-    const ann_list = props.announcements.map((ann) => {
+const Home = () => {
+    const announcements = useSelector(state => state.announcements);
+
+    const rendered_anns = announcements.map((ann) => {
         if(ann.show && ann.ID < 3) {
             return (
                 <RenderHomeItem ann={ann} />
@@ -164,9 +97,9 @@ const Home = (props) => {
     });
     return (
         <div className="container">
-            <AddAnnouncement announcements={props.announcements} />
+            <AddAnnouncement announcements={announcements} />
             <div className="row">
-                {ann_list}
+                {rendered_anns}
             </div>
         </div>
     );
