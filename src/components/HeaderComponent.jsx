@@ -14,10 +14,10 @@ class Header extends Component {
     }
 
     componentDidMount() {
-    this.setState({
-      filtered: this.props.announcements
-    });
-  }
+        this.setState({
+          filtered: this.props.announcements
+        });
+    }
 
   componentWillReceiveProps(nextProps) {
     this.setState({

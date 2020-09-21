@@ -39,9 +39,9 @@ function FindSimilar({announcements, selectedAnn}) {
                 }
                 all_words_count.delete(maxkey);
             }
-            console.log(annID_list.length);
             if (annID_list.length > 0) {
                 return annID_list.map((ID) => {
+                    console.log(annID_list.length);
                     return <RenderAnn ann={announcements.filter((ann) => ann.ID === ID)[0]} />
                 });
             }
@@ -66,7 +66,7 @@ function RenderAnn({ann}) {
                         <CardBody>
                             <CardText>{ann.description}</CardText>
                         </CardBody>
-                        <CardFooter className="text-muted text-right">{ann.edited?<i>Edited </i>: null }
+                        <CardFooter className="text-muted text-right">{ann.edited?<i>Edited </i>: null}
                             Posted on {ann.date.toDateString()}</CardFooter>
                     </Card>
                 </div>
