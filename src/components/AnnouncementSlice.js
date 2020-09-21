@@ -1,19 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { nanoid } from '@reduxjs/toolkit';
 
 const initialState = [
     {
-        ID: -2,
+        ID: nanoid(),
         title: "Test announcement 1",
         description: "Test test test",
-        date: new Date(2020, 8, 21),
+        date: new Date(2020, 8, 21).toDateString(),
         show: true,
         edited: false
     },
     {
-        ID: -1,
+        ID: nanoid(),
         title: "Test announcement 2",
         description: "Test test test test test",
-        date: new Date(),
+        date: new Date(2020, 8, 21).toDateString(),
         show: true,
         edited: false
     }
@@ -22,7 +23,13 @@ const initialState = [
 const AnnouncementSlice = createSlice({
     name: 'announcements',
     initialState,
-    reducers: {}
+    reducers: {
+        announcementAdded(state, action) {
+            state.push(action.payload);
+        }
+    }
 });
+
+export const { announcementAdded } = AnnouncementSlice.actions;
 
 export default AnnouncementSlice.reducer;

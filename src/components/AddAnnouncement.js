@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import { Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap';
+import { useDispatch } from 'react-redux';
+import { nanoid } from '@reduxjs/toolkit';
+import { announcementAdded } from './AnnouncementSlice';
 
 const AddAnnouncement = () => {
 
@@ -8,21 +11,28 @@ const AddAnnouncement = () => {
     const [description, setDescription] = useState('');
 
     const toggleModal = () => setIsModalOpen(!isModalOpen);
-
     const onTitleChanged = e => setTitle(e.target.value)
     const onDescChanged = e => setDescription(e.target.value)
 
-    // handleSubmit(event) {
-    //     event.preventDefault();
-    //     this.toggleModal();
-    //     this.props.announcements.push({
-    //         ID: this.props.announcements.length,
-    //         title: this.title.value,
-    //         description: this.description.value,
-    //         date: new Date(),
-    //         show: true
-    //     });
-    // }
+    const dispatch = useDispatch();
+
+    const onSubmitClicked = () => {
+        if (title && description) {
+            dispatch(
+                announcementAdded({
+                    ID: nanoid(),
+                    title,
+                    description,
+                    date: new Date().toDateString(),
+                    show: true,
+                    edited: false
+                })
+            );
+            setTitle('');
+            setDescription('');
+            toggleModal();
+        }
+    }
 
     return (
         <div>
@@ -41,7 +51,7 @@ const AddAnnouncement = () => {
                             <Label htmlFor="description">Description</Label>
                             <Input type="textarea" id="description" name="description" value={description} onChange={onDescChanged} />
                         </FormGroup>
-                        <Button type="button" value="submit" color="primary">Submit</Button>
+                        <Button type="button" value="submit" color="primary" onClick={onSubmitClicked}>Submit</Button>
                     </Form>
                 </ModalBody>
             </Modal>

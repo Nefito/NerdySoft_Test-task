@@ -54,10 +54,10 @@ class RenderHomeItem extends Component {
                         </CardHeader>
                         <Link to={`/announcement/${this.props.ann.ID}`} style={{ textDecoration: 'none', color: 'black'}}>
                             <CardBody>
-                                <CardText>{this.props.ann.description}</CardText>
+                                <CardText>{this.props.ann.description.substring(0, 150)}<b>...</b></CardText>
                             </CardBody>
                             <CardFooter className="text-muted text-right">{this.props.ann.edited?<i>Edited </i>: null }
-                                Posted on {this.props.ann.date.toDateString()}</CardFooter>
+                                Posted on {this.props.ann.date}</CardFooter>
                         </Link>
                     </Card>
                     <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
@@ -88,7 +88,7 @@ const Home = () => {
     const announcements = useSelector(state => state.announcements);
 
     const rendered_anns = announcements.map((ann) => {
-        if(ann.show && ann.ID < 3) {
+        if(ann.show) {
             return (
                 <RenderHomeItem ann={ann} />
             );
