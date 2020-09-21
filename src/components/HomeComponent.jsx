@@ -92,5 +92,4 @@ const Home = () => {
     );
 }
 
-export {RenderHomeItem}
 export default Home;

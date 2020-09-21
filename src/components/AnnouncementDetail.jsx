@@ -2,7 +2,6 @@ import React from 'react';
 import { Card, CardHeader, CardText, CardBody, CardFooter, Breadcrumb, BreadcrumbItem, Navbar, NavbarBrand, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { RenderHomeItem } from './HomeComponent';
 
 function FindSimilar({announcements, selectedAnn}) {
     let all_words_count = new Map();
@@ -29,17 +28,15 @@ function FindSimilar({announcements, selectedAnn}) {
             all_words_count.set(ann.ID, title_word_count+desc_words_count);
         }
     });
-
     function RenderSimilarAnn() {
-        let annID_list = []
+        let annID_list = [];
+        let sorted_map = new Map([...all_words_count.entries()].sort((a, b) => b[1] - a[1]));
         for (let i = 0; i < 3; i++) {
-            let maxkey;
             for(let [key, value] of all_words_count.entries()) {
-                if(value === Math.max(...all_words_count.values()) && value > 1){
-                    maxkey = key;
-                    annID_list.push(maxkey);
+                if(value > 1){
+                    annID_list.push(key);
+                    all_words_count.delete(key);
                 }
-                all_words_count.delete(maxkey);
             }
             if (annID_list.length > 0) {
                 return annID_list.map((ID) => {

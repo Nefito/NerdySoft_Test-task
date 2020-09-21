@@ -17,6 +17,14 @@ const initialState = [
         date: new Date(2020, 8, 21).toDateString(),
         show: true,
         edited: false
+    },
+    {
+        ID: nanoid(),
+        title: "Test announcement 3",
+        description: "Test test test test",
+        date: new Date(2020, 8, 21).toDateString(),
+        show: true,
+        edited: false
     }
 ];
 
