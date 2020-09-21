@@ -1,87 +1,74 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Card, CardHeader, CardText, CardBody, CardFooter, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import AddAnnouncement from './AddAnnouncement';
 
-class RenderHomeItem extends Component {
-    constructor(props) {
-        super(props);
+const RenderHomeItem = (props) => {
 
-        this.state = {
-            showItem: this.props.ann.show,
-            isModalOpen: false
-        };
-        this.hideItem = this.hideItem.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.toggleModal = this.toggleModal.bind(this);
+    const ann = props.ann;
+
+    const [showItem, setShowItem] = useState(ann.show);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const toggleModal = () => setIsModalOpen(!isModalOpen);
+    const hideItem = () => {
+        setShowItem(false);
+        ann.show = false;
     }
 
-    toggleModal() {
-        this.setState({
-          isModalOpen: !this.state.isModalOpen
-        });
-    }
+    // handleSubmit(event) {
+    //     event.preventDefault();
+    //     this.toggleModal();
+    //     this.props.ann.edited = true;
+    //     this.props.ann.title = this.title.value;
+    //     this.props.ann.description = this.description.value;
+    // }
 
-    hideItem() {
-        this.props.ann.show = false;
-        this.setState({showItem: false});
-    }
-
-    handleSubmit(event) {
-        event.preventDefault();
-        this.toggleModal();
-        this.props.ann.edited = true;
-        this.props.ann.title = this.title.value;
-        this.props.ann.description = this.description.value;
-    }
-
-    render() {
-        if(this.props.ann.show){
-            return (
-                <div className="col-12 mt-5" key={this.props.ann.ID}>
-                    <Card className="text-center">
-                        <CardHeader tag="h3">
-                            <Button className="float-right ml-1" outline color="danger" onClick={() => this.hideItem()}>
-                                <span className="fa fa-trash" />
-                            </Button>
-                            <Button className="float-right" outline onClick={() => this.toggleModal()}>
-                                <span className="fa fa-pencil" />
-                            </Button>
-                            <Link to={`/announcement/${this.props.ann.ID}`} style={{ textDecoration: 'none', color: 'black'}}>
-                                {this.props.ann.title}
-                            </Link>
-                        </CardHeader>
-                        <Link to={`/announcement/${this.props.ann.ID}`} style={{ textDecoration: 'none', color: 'black'}}>
-                            <CardBody>
-                                <CardText>{this.props.ann.description.substring(0, 150)}<b>...</b></CardText>
-                            </CardBody>
-                            <CardFooter className="text-muted text-right">{this.props.ann.edited?<i>Edited </i>: null }
-                                Posted on {this.props.ann.date}</CardFooter>
+    if(ann.show){
+        return (
+            <div className="col-12 mt-5" key={ann.ID}>
+                <Card className="text-center">
+                    <CardHeader tag="h3">
+                        <Button className="float-right ml-1" outline color="danger" onClick={() => hideItem}>
+                            <span className="fa fa-trash" />
+                        </Button>
+                        <Button className="float-right" outline onClick={() => toggleModal}>
+                            <span className="fa fa-pencil" />
+                        </Button>
+                        <Link to={`/announcement/${ann.ID}`} style={{ textDecoration: 'none', color: 'black'}}>
+                            {ann.title}
                         </Link>
-                    </Card>
-                    <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-                        <ModalHeader toggle={this.toggleModal}>Edit Announcement</ModalHeader>
-                        <ModalBody>
-                            <Form onSubmit={this.handleSubmit}>
-                                <FormGroup>
-                                    <Label htmlFor="title">Title</Label>
-                                    <Input type="text" id="title" name="title" innerRef={(input) => this.title=input} defaultValue={this.props.ann.title}/>
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label htmlFor="description">Description</Label>
-                                    <Input type="textarea" id="description" name="description" innerRef={(input) => this.description=input}
-                                        defaultValue={this.props.ann.description} />
-                                </FormGroup>
-                                <Button type="submit" value="submit" color="primary">Edit</Button>
-                            </Form>
-                        </ModalBody>
-                    </Modal>
-                </div>
-            );
-        }
-        return null;
+                    </CardHeader>
+                    <Link to={`/announcement/${ann.ID}`} style={{ textDecoration: 'none', color: 'black'}}>
+                        <CardBody>
+                            <CardText>{ann.description.substring(0, 150)}<b>...</b></CardText>
+                        </CardBody>
+                        <CardFooter className="text-muted text-right">{ann.edited?<i>Edited </i>: null }
+                            Posted on {ann.date}</CardFooter>
+                    </Link>
+                </Card>
+                <Modal isOpen={isModalOpen} toggle={toggleModal}>
+                    <ModalHeader toggle={toggleModal}>Edit Announcement</ModalHeader>
+                    <ModalBody>
+                        <Form>
+                            <FormGroup>
+                                <Label htmlFor="title">Title</Label>
+                                <Input type="text" id="title" name="title" value={ann.title} defaultValue={ann.title}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label htmlFor="description">Description</Label>
+                                <Input type="textarea" id="description" name="description" value={ann.description}
+                                    defaultValue={ann.description} />
+                            </FormGroup>
+                            <Button type="button" value="submit" color="primary">Edit</Button>
+                        </Form>
+                    </ModalBody>
+                </Modal>
+            </div>
+        );
     }
+    return null;
 }
 
 const Home = () => {
@@ -105,4 +92,5 @@ const Home = () => {
     );
 }
 
+export {RenderHomeItem}
 export default Home;

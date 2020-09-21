@@ -1,6 +1,8 @@
 import React from 'react';
-import { Card, CardHeader, CardText, CardBody, CardFooter, Breadcrumb, BreadcrumbItem, Navbar, NavbarBrand } from 'reactstrap';
+import { Card, CardHeader, CardText, CardBody, CardFooter, Breadcrumb, BreadcrumbItem, Navbar, NavbarBrand, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RenderHomeItem } from './HomeComponent';
 
 function FindSimilar({announcements, selectedAnn}) {
     let all_words_count = new Map();
@@ -41,8 +43,27 @@ function FindSimilar({announcements, selectedAnn}) {
             }
             if (annID_list.length > 0) {
                 return annID_list.map((ID) => {
-                    console.log(annID_list.length);
-                    return <RenderAnn ann={announcements.filter((ann) => ann.ID === ID)[0]} />
+                    const ann = announcements.find(ann => ann.ID === ID);
+                    return (
+                        <div key={ann.ID}>
+                            <Card className="text-center mt-2">
+                                <CardHeader tag="h3">
+                                    <Link to={`/announcement/${ann.ID}`} style={{ textDecoration: 'none', color: 'black'}}>
+                                        {ann.title}
+                                    </Link>
+                                </CardHeader>
+                                <CardBody>
+                                    <CardText>
+                                        <Link to={`/announcement/${ann.ID}`} style={{ textDecoration: 'none', color: 'black'}}>
+                                            {ann.description.substring(0, 150)}<b>...</b>
+                                        </Link>
+                                    </CardText>
+                                </CardBody>
+                                <CardFooter className="text-muted text-right">{ann.edited?<i>Edited </i>: null}
+                                    Posted on {ann.date}</CardFooter>
+                            </Card>
+                        </div>
+                    );
                 });
             }
             return (<h4> No Similar Announcements Were Found :(</h4>);
@@ -62,12 +83,23 @@ function RenderAnn({ann}) {
             return (
                 <div key={ann.ID}>
                     <Card className="text-center mt-2">
-                        <CardHeader tag="h3">{ann.title}</CardHeader>
+                        <CardHeader tag="h3">
+                            <Button className="float-right" outline>
+                                <span className="fa fa-pencil" />
+                            </Button>
+                            <Link to={`/announcement/${ann.ID}`} style={{ textDecoration: 'none', color: 'black'}}>
+                                {ann.title}
+                            </Link>
+                        </CardHeader>
                         <CardBody>
-                            <CardText>{ann.description}</CardText>
+                            <CardText>
+                                <Link to={`/announcement/${ann.ID}`} style={{ textDecoration: 'none', color: 'black'}}>
+                                    {ann.description}
+                                </Link>
+                            </CardText>
                         </CardBody>
                         <CardFooter className="text-muted text-right">{ann.edited?<i>Edited </i>: null}
-                            Posted on {ann.date.toDateString()}</CardFooter>
+                            Posted on {ann.date}</CardFooter>
                     </Card>
                 </div>
             );
@@ -79,7 +111,17 @@ function RenderAnn({ann}) {
         }
     }
 
-const AnnouncementDetail = (props) => {
+const AnnouncementDetail = ({ match }) => {
+    const { annId } = match.params;
+    const ann = useSelector(state => state.announcements.find(ann => ann.ID === annId));
+    const announcements = useSelector(state => state.announcements);
+
+    if(!ann) {
+        return (
+            <h4> Announcement Not Found :(</h4>
+        );
+    }
+
     return (
         <>
             <Navbar dark color="secondary">
@@ -93,14 +135,14 @@ const AnnouncementDetail = (props) => {
                         <BreadcrumbItem>
                             <Link to="/home">Home</Link>
                         </BreadcrumbItem>
-                        <BreadcrumbItem active>{props.ann.title}</BreadcrumbItem>
+                        <BreadcrumbItem active>{ann.title}</BreadcrumbItem>
                     </Breadcrumb>
                 </div>
-                <RenderAnn ann={props.ann} />
+                <RenderAnn ann={ann} />
                 <div className="mt-5">
                     <Card className="text-center">
                         <CardHeader tag="h3" className="mb-3">Top 3 Similar Announcements</CardHeader>
-                        <FindSimilar announcements={props.announcements} selectedAnn={props.ann} />
+                        <FindSimilar announcements={announcements} selectedAnn={ann} />
                     </Card>
                 </div>
             </div>

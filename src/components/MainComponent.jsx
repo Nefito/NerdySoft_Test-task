@@ -14,19 +14,11 @@ class Main extends Component {
     }
 
     render() {
-
-        const AnnWithId = ({match}) => {
-            return (
-                <AnnouncementDetail  announcements={this.state.announcements}
-                    ann={this.state.announcements.filter((ann) => ann.ID === parseInt(match.params.annId, 10))[0]} />
-            );
-        }
-
         return (
             <div>
                 <Switch>
                     <Route path="/home" component={() => <Header /> } />
-                    <Route path="/announcement/:annId" component={AnnWithId} />
+                    <Route path="/announcement/:annId" component={AnnouncementDetail} />
                     <Redirect to="/home" />
                 </Switch>
             </div>
