@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function FindSimilar({announcements, selectedAnn}) {
     let all_words_count = new Map();
 
-    const similar_ann_list = announcements.map((ann) => {
+    announcements.map((ann) => {
         let title_word_count = 0;
         let desc_words_count = 0;
 
