@@ -9,21 +9,11 @@ const RenderHomeItem = (props) => {
     const ann = props.ann;
 
     const [showItem, setShowItem] = useState(ann.show);
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const toggleModal = () => setIsModalOpen(!isModalOpen);
     const hideItem = () => {
         setShowItem(false);
         ann.show = false;
     }
-
-    // handleSubmit(event) {
-    //     event.preventDefault();
-    //     this.toggleModal();
-    //     this.props.ann.edited = true;
-    //     this.props.ann.title = this.title.value;
-    //     this.props.ann.description = this.description.value;
-    // }
 
     if(ann.show){
         return (
@@ -32,9 +22,6 @@ const RenderHomeItem = (props) => {
                     <CardHeader tag="h3">
                         <Button className="float-right ml-1" outline color="danger" onClick={() => hideItem}>
                             <span className="fa fa-trash" />
-                        </Button>
-                        <Button className="float-right" outline onClick={() => toggleModal}>
-                            <span className="fa fa-pencil" />
                         </Button>
                         <Link to={`/announcement/${ann.ID}`} style={{ textDecoration: 'none', color: 'black'}}>
                             {ann.title}
@@ -48,23 +35,6 @@ const RenderHomeItem = (props) => {
                             Posted on {ann.date}</CardFooter>
                     </Link>
                 </Card>
-                <Modal isOpen={isModalOpen} toggle={toggleModal}>
-                    <ModalHeader toggle={toggleModal}>Edit Announcement</ModalHeader>
-                    <ModalBody>
-                        <Form>
-                            <FormGroup>
-                                <Label htmlFor="title">Title</Label>
-                                <Input type="text" id="title" name="title" value={ann.title} defaultValue={ann.title}/>
-                            </FormGroup>
-                            <FormGroup>
-                                <Label htmlFor="description">Description</Label>
-                                <Input type="textarea" id="description" name="description" value={ann.description}
-                                    defaultValue={ann.description} />
-                            </FormGroup>
-                            <Button type="button" value="submit" color="primary">Edit</Button>
-                        </Form>
-                    </ModalBody>
-                </Modal>
             </div>
         );
     }
@@ -84,7 +54,7 @@ const Home = () => {
     });
     return (
         <div className="container">
-            <AddAnnouncement announcements={announcements} />
+            <AddAnnouncement />
             <div className="row">
                 {rendered_anns}
             </div>

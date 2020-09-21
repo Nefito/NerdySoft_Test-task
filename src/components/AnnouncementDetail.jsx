@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardHeader, CardText, CardBody, CardFooter, Breadcrumb, BreadcrumbItem, Navbar, NavbarBrand, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import EditAnnouncement from './EditAnnouncement';
 
 function FindSimilar({announcements, selectedAnn}) {
     let all_words_count = new Map();
@@ -76,37 +77,40 @@ function FindSimilar({announcements, selectedAnn}) {
 }
 
 function RenderAnn({ann}) {
-        if (ann != null && ann.show) {
-            return (
-                <div key={ann.ID}>
-                    <Card className="text-center mt-2">
-                        <CardHeader tag="h3">
-                            <Button className="float-right" outline>
-                                <span className="fa fa-pencil" />
-                            </Button>
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const toggleModal = () => setIsModalOpen(!isModalOpen);
+
+
+    if (ann != null && ann.show) {
+        return (
+            <div key={ann.ID}>
+                <Card className="text-center mt-2">
+                    <CardHeader tag="h3">
+                        <EditAnnouncement ann={ann} />
+                        <Link to={`/announcement/${ann.ID}`} style={{ textDecoration: 'none', color: 'black'}}>
+                            {ann.title}
+                        </Link>
+                    </CardHeader>
+                    <CardBody>
+                        <CardText>
                             <Link to={`/announcement/${ann.ID}`} style={{ textDecoration: 'none', color: 'black'}}>
-                                {ann.title}
+                                {ann.description}
                             </Link>
-                        </CardHeader>
-                        <CardBody>
-                            <CardText>
-                                <Link to={`/announcement/${ann.ID}`} style={{ textDecoration: 'none', color: 'black'}}>
-                                    {ann.description}
-                                </Link>
-                            </CardText>
-                        </CardBody>
-                        <CardFooter className="text-muted text-right">{ann.edited?<i>Edited </i>: null}
-                            Posted on {ann.date}</CardFooter>
-                    </Card>
-                </div>
-            );
-        }
-        else {
-            return (
-                <div></div>
-            );
-        }
+                        </CardText>
+                    </CardBody>
+                    <CardFooter className="text-muted text-right">{ann.edited?<i>Edited </i>: null}
+                        Posted on {ann.date}</CardFooter>
+                </Card>
+            </div>
+        );
     }
+    else {
+        return (
+            <div></div>
+        );
+    }
+}
 
 const AnnouncementDetail = ({ match }) => {
     const { annId } = match.params;

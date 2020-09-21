@@ -34,10 +34,18 @@ const AnnouncementSlice = createSlice({
     reducers: {
         announcementAdded(state, action) {
             state.push(action.payload);
+        },
+        announcementEdited(state, action) {
+            const {ID, title, description} = action.payload;
+            const existingAnn = state.find(ann => ann.ID === ID);
+            if (existingAnn) {
+                existingAnn.title = title;
+                existingAnn.description = description;
+            }
         }
     }
 });
 
-export const { announcementAdded } = AnnouncementSlice.actions;
+export const { announcementAdded, announcementEdited } = AnnouncementSlice.actions;
 
 export default AnnouncementSlice.reducer;
