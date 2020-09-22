@@ -1,9 +1,6 @@
 import React from 'react';
-import { Card, CardHeader, Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { RenderAnnouncement, Header } from '../components';
-import FindSimilar from './FindSimilar';
+import { AnnouncementDetailComponent } from '../components';
 
 const AnnouncementDetail = ({ match }) => {
 
@@ -18,26 +15,7 @@ const AnnouncementDetail = ({ match }) => {
     }
 
     return (
-        <>
-            <Header />
-            <div className="container">
-                <div className="row">
-                    <Breadcrumb>
-                        <BreadcrumbItem>
-                            <Link to="/home">Home</Link>
-                        </BreadcrumbItem>
-                        <BreadcrumbItem active>{ann.title}</BreadcrumbItem>
-                    </Breadcrumb>
-                </div>
-                <RenderAnnouncement ann={ann} divClass="col-12 mt-5" cardClass="text-center mt-2" editBtnNeeded={true} fullText={true} />
-                <div className="mt-5">
-                    <Card className="text-center">
-                        <CardHeader tag="h3" className="mb-3">Top 3 Similar Announcements</CardHeader>
-                        <FindSimilar announcements={announcements} selectedAnn={ann} />
-                    </Card>
-                </div>
-            </div>
-        </>
+        <AnnouncementDetailComponent ann={ann} announcements={announcements} />
     );
 }
 export default AnnouncementDetail;

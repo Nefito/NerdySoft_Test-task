@@ -19,13 +19,21 @@ const MyModal = (props) => {
                     <Form>
                         <FormGroup>
                             <Label htmlFor="title">Title</Label>
-                            <Input type="text" id="title" name="title" value={props.valueNeeded? props.title : null}
-                                defaultValue={props.defValueNeeded? props.title : null} onChange={props.onTitleChanged} />
+                            {props.valueNeeded?
+                                <Input type="text" id="title" name="title" value={props.title} onChange={props.onTitleChanged} />
+                            : null}
+                            {props.defValueNeeded?
+                                <Input type="text" id="title" name="title" defaultValue={props.title} onChange={props.onTitleChanged} />
+                            : null}
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="description">Description</Label>
-                            <Input type="textarea" id="description" name="description" value={props.valueNeeded? props.description : null}
-                                defaultValue={props.defValueNeeded? props.description : null}  onChange={props.onDescChanged} />
+                            {props.valueNeeded?
+                                <Input type="textarea" id="description" name="description" value={props.description} onChange={props.onDescChanged} />
+                            : null}
+                            {props.defValueNeeded?
+                                <Input type="textarea" id="description" name="description" defaultValue={props.description} onChange={props.onDescChanged} />
+                            : null}
                         </FormGroup>
                         <Button type="button" value="submit" color="primary" onClick={() => {props.onBtnClicked(); toggleModal()}}>
                             {props.submitBtnText}

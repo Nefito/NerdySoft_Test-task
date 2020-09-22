@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 import { AnnouncementList, Header } from '../components';
 
-const Home = (props) => {
+const Home = () => {
     const announcements = useSelector(state => state.announcements);
     const [filtered, setFiltered] = useState(announcements);
     const [searchItem, setSearchItem] = useState('');
@@ -14,6 +14,7 @@ const Home = (props) => {
     useEffect(() => {
         const res = announcements.filter(ann => ann.title.toLowerCase().includes(searchItem.toLowerCase()));
         setFiltered(res);
+        console.log(res);
     }, [searchItem]);
 
     return (

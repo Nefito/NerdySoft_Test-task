@@ -3,7 +3,6 @@ import { Card, CardHeader, CardText, CardBody, CardFooter, Button } from 'reacts
 import { Link } from 'react-router-dom';
 import { EditAnnouncement } from '../Announcement';
 
-
 const RenderAnnouncement = (props) => {
     if(props.ann.show){
         return (
