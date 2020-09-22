@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import RenderAnnouncement from '../components/RenderAnnouncementComponent';
+import {RenderAnnouncement} from '../components';
 
 const RenderHomeItem = (props) => {
 
