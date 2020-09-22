@@ -4,7 +4,7 @@ import {AddAnnouncement} from '../Announcement';
 import { RenderHomeItem } from '../Home';
 
 const AnnouncementList = (props) => {
-    let announcements = useSelector(state => state.announcements);
+    const announcements = props.announcements;
 
     const rendered_anns = announcements.map((ann) => {
         if(ann.show) {

@@ -11,16 +11,15 @@ const Home = () => {
         setSearchItem(event.target.value);
     };
 
-    useEffect(() => {
-        const res = announcements.filter(ann => ann.title.toLowerCase().includes(searchItem.toLowerCase()));
-        setFiltered(res);
-        console.log(res);
-    }, [searchItem]);
+    // useEffect(() => {
+    // //    const res = announcements.filter(ann => ann.title.toLowerCase().includes(searchItem.toLowerCase()));
+    //     setFiltered(res);
+    // }, [searchItem]);
 
     return (
         <>
             <Header searchNeeded={true} handleChange={handleChange} />
-            <AnnouncementList announcements={filtered} />
+            <AnnouncementList announcements={announcements.filter(ann => ann.title.toLowerCase().includes(searchItem.toLowerCase()))} />
         </>
     );
 }
