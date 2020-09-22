@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from './HeaderComponent';
 import {AnnouncementDetail} from '../Announcement';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import {Home} from '../Home';

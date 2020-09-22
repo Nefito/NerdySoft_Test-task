@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import RenderAnnouncement from '../components/RenderAnnouncementComponent';
 
 const RenderHomeItem = (props) => {
@@ -9,10 +9,9 @@ const RenderHomeItem = (props) => {
 
     const hideItem = () => {
         setShowItem(false);
-        ann.show = false;
     }
 
-    if(ann.show){
+    if(showItem){
         return (
             <RenderAnnouncement ann={ann} divClass="col-12 mt-5" cardClass="text-center" deleteBtnNeeded={true} hideItem={hideItem} fullText={false} />
         );
