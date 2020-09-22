@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardText, CardBody, CardFooter, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap';
+import { Card, CardHeader, CardText, CardBody, CardFooter, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import AddAnnouncement from './AddAnnouncement';
@@ -8,10 +8,10 @@ const RenderHomeItem = (props) => {
 
     const ann = props.ann;
 
-    const [showItem, setShowItem] = useState(ann.show);
+    //const [showItem, setShowItem] = useState(ann.show);
 
     const hideItem = () => {
-        setShowItem(false);
+        //setShowItem(false);
         ann.show = false;
     }
 

@@ -41,6 +41,7 @@ const AnnouncementSlice = createSlice({
             if (existingAnn) {
                 existingAnn.title = title;
                 existingAnn.description = description;
+                existingAnn.edited = true;
             }
         }
     }

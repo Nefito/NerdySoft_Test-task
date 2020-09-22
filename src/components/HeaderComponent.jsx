@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Navbar, NavbarBrand, Form, Input } from 'reactstrap';
 import Home from './HomeComponent';
 
+//not rewritten yet
 class Header extends Component {
     constructor(props) {
         super(props);

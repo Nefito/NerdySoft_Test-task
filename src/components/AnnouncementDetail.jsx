@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardText, CardBody, CardFooter, Breadcrumb, BreadcrumbItem, Navbar, NavbarBrand, Button } from 'reactstrap';
+import { Card, CardHeader, CardText, CardBody, CardFooter, Breadcrumb, BreadcrumbItem, Navbar, NavbarBrand } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import EditAnnouncement from './EditAnnouncement';
@@ -79,8 +79,6 @@ function FindSimilar({announcements, selectedAnn}) {
 function RenderAnn({ann}) {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const toggleModal = () => setIsModalOpen(!isModalOpen);
-
 
     if (ann != null && ann.show) {
         return (
