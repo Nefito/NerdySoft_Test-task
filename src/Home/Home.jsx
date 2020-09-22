@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
-import { Navbar, NavbarBrand, Form, Input } from 'reactstrap';
-import { Home, Header } from '../components';
+import { AnnouncementList, Header } from '../components';
 
-const Search = (props) => {
+const Home = (props) => {
     const announcements = useSelector(state => state.announcements);
     const [filtered, setFiltered] = useState(announcements);
     const [searchItem, setSearchItem] = useState('');
@@ -20,9 +19,9 @@ const Search = (props) => {
     return (
         <>
             <Header searchNeeded={true} handleChange={handleChange} />
-            <Home announcements={filtered} />
+            <AnnouncementList announcements={filtered} />
         </>
     );
 }
 
-export default Search;
+export default Home;

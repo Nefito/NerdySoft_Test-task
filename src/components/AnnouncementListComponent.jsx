@@ -1,9 +1,8 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import {AddAnnouncement} from '../Announcement';
 import { RenderHomeItem } from '../Home';
 
-const Home = (props) => {
+const AnnouncementList = (props) => {
     const announcements = props.announcements;
 
     const rendered_anns = announcements.map((ann) => {
@@ -25,4 +24,4 @@ const Home = (props) => {
     );
 }
 
-export default Home;
+export default AnnouncementList;

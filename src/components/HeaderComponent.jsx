@@ -1,6 +1,5 @@
 import React from 'react';
 import { Navbar, NavbarBrand, Form, Input } from 'reactstrap';
-import Home from './HomeComponent';
 
 const Header = (props) => {
     return (
