@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux'
+import React from 'react';
+import { useSelector } from 'react-redux';
 import {AddAnnouncement} from '../Announcement';
 import { RenderHomeItem } from '../Home';
 
-const Home = () => {
-    const announcements = useSelector(state => state.announcements);
+const Home = (props) => {
+    const announcements = props.announcements;
 
     const rendered_anns = announcements.map((ann) => {
         if(ann.show) {

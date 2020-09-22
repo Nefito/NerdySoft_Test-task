@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardHeader, Breadcrumb, BreadcrumbItem, Navbar, NavbarBrand } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import RenderAnnouncement from '../components/RenderAnnouncementComponent';
+import { RenderAnnouncement, Header } from '../components';
 
 function FindSimilar({announcements, selectedAnn}) {
     let all_words_count = new Map();
@@ -84,11 +84,7 @@ const AnnouncementDetail = ({ match }) => {
 
     return (
         <>
-            <Navbar dark color="secondary">
-                <div className="container">
-                    <NavbarBrand href="/">Announcement Website</NavbarBrand>
-                </div>
-            </Navbar>
+            <Header />
             <div className="container">
                 <div className="row">
                     <Breadcrumb>
