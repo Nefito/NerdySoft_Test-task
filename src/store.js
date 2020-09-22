@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import announcementsReducer from './components/AnnouncementSlice';
+import announcementsReducer from './Announcement/AnnouncementSlice';
 
 export default configureStore({
   reducer: {

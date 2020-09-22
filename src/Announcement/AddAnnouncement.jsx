@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 import { announcementAdded } from './AnnouncementSlice';
-import MyModal from './ModalComponent';
+import MyModal from '../components/ModalComponent';
 
 const AddAnnouncement = () => {
 

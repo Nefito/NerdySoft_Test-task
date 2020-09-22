@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Card, CardHeader, CardText, CardBody, CardFooter, Breadcrumb, BreadcrumbItem, Navbar, NavbarBrand } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import EditAnnouncement from './EditAnnouncement';
+import {EditAnnouncement} from './index';
 
 function FindSimilar({announcements, selectedAnn}) {
     let all_words_count = new Map();
@@ -148,5 +148,4 @@ const AnnouncementDetail = ({ match }) => {
         </>
     );
 }
-
 export default AnnouncementDetail;

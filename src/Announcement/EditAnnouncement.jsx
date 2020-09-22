@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { announcementEdited } from './AnnouncementSlice';
-import MyModal from './ModalComponent';
+import MyModal from '../components/ModalComponent';
 
 const EditAnnouncement = (props) => {
 
@@ -26,5 +26,4 @@ const EditAnnouncement = (props) => {
              onBtnClicked={onEditClicked} defValueNeeded={true} title={ann.title} description={ann.description}/>
     );
 }
-
 export default EditAnnouncement;

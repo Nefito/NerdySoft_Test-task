@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Card, CardHeader, CardText, CardBody, CardFooter, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux'
-import AddAnnouncement from './AddAnnouncement';
+import {AddAnnouncement} from '../Announcement';
 
 const RenderHomeItem = (props) => {
 

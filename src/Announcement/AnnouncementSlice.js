@@ -48,5 +48,4 @@ const AnnouncementSlice = createSlice({
 });
 
 export const { announcementAdded, announcementEdited } = AnnouncementSlice.actions;
-
 export default AnnouncementSlice.reducer;

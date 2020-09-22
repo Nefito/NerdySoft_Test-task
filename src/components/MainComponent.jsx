@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './HeaderComponent';
-import AnnouncementDetail from './AnnouncementDetail';
+import {AnnouncementDetail} from '../Announcement';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 const Main = () => {
