@@ -1,41 +1,22 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardText, CardBody, CardFooter, Button } from 'reactstrap';
-import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import {AddAnnouncement} from '../Announcement';
+import RenderAnnouncement from './RenderAnnouncementComponent';
 
 const RenderHomeItem = (props) => {
 
     const ann = props.ann;
 
-    //const [showItem, setShowItem] = useState(ann.show);
+    const [showItem, setShowItem] = useState(ann.show);
 
     const hideItem = () => {
-        //setShowItem(false);
+        setShowItem(false);
         ann.show = false;
     }
 
     if(ann.show){
         return (
-            <div className="col-12 mt-5" key={ann.ID}>
-                <Card className="text-center">
-                    <CardHeader tag="h3">
-                        <Button className="float-right ml-1" outline color="danger" onClick={() => hideItem}>
-                            <span className="fa fa-trash" />
-                        </Button>
-                        <Link to={`/announcement/${ann.ID}`} style={{ textDecoration: 'none', color: 'black'}}>
-                            {ann.title}
-                        </Link>
-                    </CardHeader>
-                    <Link to={`/announcement/${ann.ID}`} style={{ textDecoration: 'none', color: 'black'}}>
-                        <CardBody>
-                            <CardText>{ann.description.substring(0, 150)}<b>...</b></CardText>
-                        </CardBody>
-                        <CardFooter className="text-muted text-right">{ann.edited?<i>Edited </i>: null }
-                            Posted on {ann.date}</CardFooter>
-                    </Link>
-                </Card>
-            </div>
+            <RenderAnnouncement ann={ann} divClass="col-12 mt-5" cardClass="text-center" deleteBtnNeeded={true} hideItem={hideItem} fullText={false} />
         );
     }
     return null;

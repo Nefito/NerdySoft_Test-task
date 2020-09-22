@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Card, CardHeader, CardText, CardBody, CardFooter, Breadcrumb, BreadcrumbItem, Navbar, NavbarBrand } from 'reactstrap';
+import React from 'react';
+import { Card, CardHeader, Breadcrumb, BreadcrumbItem, Navbar, NavbarBrand } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import {EditAnnouncement} from './index';
+import RenderAnnouncement from '../components/RenderAnnouncementComponent';
 
 function FindSimilar({announcements, selectedAnn}) {
     let all_words_count = new Map();
@@ -33,7 +33,7 @@ function FindSimilar({announcements, selectedAnn}) {
         let annID_list = [];
         let sorted_map = new Map([...all_words_count.entries()].sort((a, b) => b[1] - a[1]));
         for (let i = 0; i < 3; i++) {
-            for(let [key, value] of all_words_count.entries()) {
+            for(let [key, value] of sorted_map.entries()) {
                 if(value > 1){
                     annID_list.push(key);
                     all_words_count.delete(key);
@@ -43,24 +43,7 @@ function FindSimilar({announcements, selectedAnn}) {
                 return annID_list.map((ID) => {
                     const ann = announcements.find(ann => ann.ID === ID);
                     return (
-                        <div key={ann.ID}>
-                            <Card className="text-center mt-2">
-                                <CardHeader tag="h3">
-                                    <Link to={`/announcement/${ann.ID}`} style={{ textDecoration: 'none', color: 'black'}}>
-                                        {ann.title}
-                                    </Link>
-                                </CardHeader>
-                                <CardBody>
-                                    <CardText>
-                                        <Link to={`/announcement/${ann.ID}`} style={{ textDecoration: 'none', color: 'black'}}>
-                                            {ann.description.substring(0, 150)}<b>...</b>
-                                        </Link>
-                                    </CardText>
-                                </CardBody>
-                                <CardFooter className="text-muted text-right">{ann.edited?<i>Edited </i>: null}
-                                    Posted on {ann.date}</CardFooter>
-                            </Card>
-                        </div>
+                        <RenderAnnouncement ann={ann} divClass="mt-3" cardClass="text-center mt-2" fullText={false} />
                     );
                 });
             }
@@ -77,38 +60,16 @@ function FindSimilar({announcements, selectedAnn}) {
 }
 
 function RenderAnn({ann}) {
-
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
     if (ann != null && ann.show) {
         return (
-            <div key={ann.ID}>
-                <Card className="text-center mt-2">
-                    <CardHeader tag="h3">
-                        <EditAnnouncement ann={ann} />
-                        <Link to={`/announcement/${ann.ID}`} style={{ textDecoration: 'none', color: 'black'}}>
-                            {ann.title}
-                        </Link>
-                    </CardHeader>
-                    <CardBody>
-                        <CardText>
-                            <Link to={`/announcement/${ann.ID}`} style={{ textDecoration: 'none', color: 'black'}}>
-                                {ann.description}
-                            </Link>
-                        </CardText>
-                    </CardBody>
-                    <CardFooter className="text-muted text-right">{ann.edited?<i>Edited </i>: null}
-                        Posted on {ann.date}</CardFooter>
-                </Card>
-            </div>
+            <RenderAnnouncement ann={ann} divClass="col-12 mt-5" cardClass="text-center mt-2" editBtnNeeded={true} fullText={true} />
         );
     }
-    else {
-        return (
-            <div></div>
-        );
-    }
+    return (
+        <div></div>
+    );
 }
+
 
 const AnnouncementDetail = ({ match }) => {
     const { annId } = match.params;
