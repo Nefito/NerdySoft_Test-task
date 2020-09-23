@@ -25,6 +25,7 @@ const FindSimilar = ({announcements, selectedAnn}) => {
             }
             all_words_count.set(ann.ID, title_word_count+desc_words_count);
         }
+        return null;
     });
 
     let annID_list = [];
