@@ -15,8 +15,9 @@ const EditAnnouncement = ({ dispatch, ann }) => {
     }
 
     return (
-        <MyModal submitBtnText="Edit" faIcon="pencil" btnClassName="float-right" btnColor="secondary"  onTitleChanged={onTitleChanged} onDescChanged={onDescChanged}
-             onBtnClicked={onEditClicked} defValueNeeded={true} title={ann.title} description={ann.description}/>
+        <MyModal submitBtnText="Edit" faIcon="pencil" btnClassName="float-right" btnColor="secondary" onBtnClicked={onEditClicked}
+            onTitleChanged={onTitleChanged} onDescChanged={onDescChanged}
+            defValueNeeded={true} title={ann.title} description={ann.description}/>
     );
 }
 export default connect()(EditAnnouncement);

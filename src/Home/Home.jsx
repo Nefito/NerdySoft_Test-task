@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { AnnouncementList, Header } from '../components';
+import { selectAnnouncements } from '../redux/selectors';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
-        announcements: state.announcements
+        announcements: selectAnnouncements(state)
     }
 }
 

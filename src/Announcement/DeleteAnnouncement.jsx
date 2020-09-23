@@ -4,6 +4,7 @@ import { Button } from 'reactstrap'
 import { deleteAnnouncement } from '../redux/ActionCreators';
 
 const DeleteAnnouncement = ({dispatch, annId}) => {
+    
     const onDelete = annId => {
         dispatch(deleteAnnouncement(annId));
     }
