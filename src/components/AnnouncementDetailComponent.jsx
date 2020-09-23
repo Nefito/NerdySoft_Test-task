@@ -1,17 +1,20 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { Card, CardHeader, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { RenderAnnouncement, Header } from '../components';
 import {FindSimilar} from '../Announcement';
 
+const mapStateToProps = (state, annId) => {
+    return {
+        announcements: state.announcements
+    }
+}
 
-const AnnouncementDetailComponent = ({ match }) => {
+const AnnouncementDetailComponent = ({announcements, match }) => {
 
     const { annId } = match.params;
-    const ann = useSelector(state => state.announcements.find(ann => ann.ID === annId));
-    const announcements = useSelector(state => state.announcements);
-
+    const ann = announcements.find(ann => ann.ID === annId);
     if(!ann) {
         return (
             <h4> Announcement Not Found :(</h4>
@@ -42,4 +45,4 @@ const AnnouncementDetailComponent = ({ match }) => {
     );
 }
 
-export default AnnouncementDetailComponent;
+export default connect(mapStateToProps)(AnnouncementDetailComponent);

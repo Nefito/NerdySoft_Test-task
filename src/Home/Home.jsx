@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { connect } from 'react-redux';
+import { store } from '../redux/configureStore';
 import { AnnouncementList, Header } from '../components';
 
-const Home = () => {
-    const announcements = useSelector(state => state.announcements);
+const mapStateToProps = state => {
+    return {
+        announcements: state.announcements
+    }
+}
+
+const Home = ({announcements}) => {
     const [searchItem, setSearchItem] = useState('');
 
     const handleChange = event => {
         setSearchItem(event.target.value);
     };
-
+    //console.log(announcements.announcements);
     return (
         <>
             <Header searchNeeded={true} handleChange={handleChange} />
@@ -18,4 +24,4 @@ const Home = () => {
     );
 }
 
-export default Home;
+export default connect(mapStateToProps)(Home);

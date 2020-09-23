@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
-import { announcementAdded } from './AnnouncementSlice';
+import { addAnnouncement } from '../redux/ActionCreators';
 import MyModal from '../components/ModalComponent';
 
-const AddAnnouncement = () => {
+const AddAnnouncement = ({ dispatch }) => {
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -12,18 +12,15 @@ const AddAnnouncement = () => {
     const onTitleChanged = e => setTitle(e.target.value)
     const onDescChanged = e => setDescription(e.target.value)
 
-    const dispatch = useDispatch();
 
     const onSubmitClicked = () => {
         if (title && description) {
             dispatch(
-                announcementAdded({
+                addAnnouncement({
                     ID: nanoid(),
                     title,
                     description,
-                    date: new Date().toDateString(),
-                    show: true,
-                    edited: false
+                    date: new Date().toDateString()
                 })
             );
             setTitle('');
@@ -36,4 +33,4 @@ const AddAnnouncement = () => {
              onBtnClicked={onSubmitClicked} valueNeeded={true} title={title} description={description}/>
     );
 }
-export default AddAnnouncement;
+export default connect()(AddAnnouncement);

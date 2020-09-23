@@ -5,18 +5,9 @@ const RenderHomeItem = (props) => {
 
     const ann = props.ann;
 
-    const [showItem, setShowItem] = useState(ann.show);
-
-    const hideItem = () => {
-        setShowItem(false);
-    }
-
-    if(showItem){
-        return (
-            <RenderAnnouncement ann={ann} divClass="col-12 mt-5" cardClass="text-center" deleteBtnNeeded={true} hideItem={hideItem} fullText={false} />
-        );
-    }
-    return null;
+    return (
+        <RenderAnnouncement ann={ann} divClass="col-12 mt-5" cardClass="text-center" deleteBtnNeeded={true}  fullText={false} />
+    );
 }
 
 export default RenderHomeItem;

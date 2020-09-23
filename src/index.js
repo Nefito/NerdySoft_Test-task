@@ -5,7 +5,7 @@ import 'font-awesome/css/font-awesome.css';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import store from './store';
+import { store } from './redux/configureStore';
 import { Provider } from 'react-redux';
 
 ReactDOM.render(
