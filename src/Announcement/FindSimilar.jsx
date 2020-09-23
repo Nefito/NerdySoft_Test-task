@@ -41,7 +41,9 @@ const FindSimilar = ({announcements, selectedAnn}) => {
             return annID_list.map((ID) => {
                 const ann = announcements.find(ann => ann.ID === ID);
                 return (
-                    <RenderAnnouncement ann={ann} divClass="mt-3" cardClass="text-center mt-2" fullText={false} />
+                    <div key={ann.ID} className="col-12">
+                        <RenderAnnouncement ann={ann} divClass="mt-3" cardClass="text-center mt-2" fullText={false} />
+                    </div>
                 );
             });
         }

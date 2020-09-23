@@ -6,7 +6,7 @@ import { EditAnnouncement } from '../Announcement';
 const RenderAnnouncement = (props) => {
     if(props.ann.show){
         return (
-            <div className={props.divClass} key={props.ann.ID}>
+            <div className={props.divClass}>
                 <Card className={props.cardClass}>
                     <CardHeader tag="h3">
                         {props.deleteBtnNeeded?

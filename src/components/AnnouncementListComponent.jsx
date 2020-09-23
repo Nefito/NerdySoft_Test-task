@@ -8,7 +8,9 @@ const AnnouncementList = (props) => {
     const rendered_anns = announcements.map((ann) => {
         if(ann.show) {
             return (
-                <RenderHomeItem ann={ann} />
+                <div className="col-12" key={ann.ID}>
+                    <RenderHomeItem ann={ann} />
+                </div>
             );
         }
         return null;
