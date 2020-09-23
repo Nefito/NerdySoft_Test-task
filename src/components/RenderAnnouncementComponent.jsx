@@ -1,17 +1,17 @@
 import React from 'react';
-import { Card, CardHeader, CardText, CardBody, CardFooter, Button } from 'reactstrap';
+import { Card, CardHeader, CardText, CardBody, CardFooter } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { EditAnnouncement } from '../Announcement';
+import { EditAnnouncement, DeleteAnnouncement } from '../Announcement';
 
-const RenderAnnouncement = (props) => {
+
+const RenderAnnouncement = ( props ) => {
+
     return (
         <div className={props.divClass}>
             <Card className={props.cardClass}>
                 <CardHeader tag="h3">
                     {props.deleteBtnNeeded?
-                        <Button className="float-right ml-1" outline color="danger" onClick={props.hideItem}>
-                            <span className="fa fa-trash" />
-                        </Button>
+                        <DeleteAnnouncement annId={props.ann.ID} />
                         : null
                     }
                     {props.editBtnNeeded?
@@ -31,6 +31,6 @@ const RenderAnnouncement = (props) => {
                 </Link>
             </Card>
         </div>
-    );    
+    );
 }
 export default RenderAnnouncement;

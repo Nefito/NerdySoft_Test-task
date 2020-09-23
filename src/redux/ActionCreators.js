@@ -8,7 +8,7 @@ export const editAnnouncement = editedAnn => ({
     type: ActionTypes.EDIT_ANNOUNCEMENT,
     payload: editedAnn
 });
-// export const deleteAnnouncement = annId = ({
-//     type: ActionTypes.DELETE_ANNOUNCEMENT,
-//     payload: annId
-// });
+export const deleteAnnouncement = annId => ({
+     type: ActionTypes.DELETE_ANNOUNCEMENT,
+     payload: annId
+ });

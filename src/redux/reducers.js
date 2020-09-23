@@ -58,7 +58,9 @@ export const Reducers = (state = initialState, action) => {
             });
 
         case ActionTypes.DELETE_ANNOUNCEMENT:
-            return state.filter(ann => ann.ID !== action.payload);
+            return {
+                announcements: state.announcements.filter(ann => ann.ID !== action.payload)
+            };
 
         default:
             return state;

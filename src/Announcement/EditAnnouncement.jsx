@@ -11,10 +11,8 @@ const EditAnnouncement = ({ dispatch, ann }) => {
     const onDescChanged = e => setDescription(e.target.value)
 
     const onEditClicked = () => {
-    if (title && description) {
-      dispatch(editAnnouncement({ ID: ann.ID, title, description }))
+          dispatch(editAnnouncement({ ID: ann.ID, title, description }));
     }
-  }
 
     return (
         <MyModal submitBtnText="Edit" faIcon="pencil" btnClassName="float-right" btnColor="secondary"  onTitleChanged={onTitleChanged} onDescChanged={onDescChanged}
