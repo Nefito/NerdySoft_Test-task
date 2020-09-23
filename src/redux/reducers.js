@@ -49,7 +49,8 @@ export const Reducers = (state = initialState, action) => {
                     if (ann.ID === action.payload.ID) {
                         return Object.assign({}, ann, {
                             title: action.payload.title,
-                            description: action.payload.description
+                            description: action.payload.description,
+                            edited: true
                         });
                     }
                     return ann;
