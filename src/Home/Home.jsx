@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { store } from '../redux/configureStore';
 import { AnnouncementList, Header } from '../components';
 
 const mapStateToProps = state => {
@@ -15,7 +14,6 @@ const Home = ({announcements}) => {
     const handleChange = event => {
         setSearchItem(event.target.value);
     };
-    //console.log(announcements.announcements);
     return (
         <>
             <Header searchNeeded={true} handleChange={handleChange} />

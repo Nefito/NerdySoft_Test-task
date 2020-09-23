@@ -44,8 +44,17 @@ export const Reducers = (state = initialState, action) => {
             });
 
         case ActionTypes.EDIT_ANNOUNCEMENT:
-            return state.map(ann => ann.ID === action.payload.ID ? { ...ann, title: action.payload.title,
-                description: action.payload.description, edited: true } : ann);
+            return Object.assign({}, state, {
+                announcements: state.announcements.map(ann => {
+                    if (ann.ID === action.payload.ID) {
+                        return Object.assign({}, ann, {
+                            title: action.payload.title,
+                            description: action.payload.description
+                        });
+                    }
+                    return ann;
+                })
+            });
 
         case ActionTypes.DELETE_ANNOUNCEMENT:
             return state.filter(ann => ann.ID !== action.payload);

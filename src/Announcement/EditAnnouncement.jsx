@@ -1,23 +1,18 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
-import { announcementEdited } from './AnnouncementSlice';
+import { connect } from 'react-redux';
+import { editAnnouncement } from '../redux/ActionCreators';
 import MyModal from '../components/ModalComponent';
 
-const EditAnnouncement = (props) => {
-
-    const ann = props.ann;
-
+const EditAnnouncement = ({ dispatch, ann }) => {
     const [title, setTitle] = useState(ann.title);
     const [description, setDescription] = useState(ann.description);
 
     const onTitleChanged = e => setTitle(e.target.value)
     const onDescChanged = e => setDescription(e.target.value)
 
-    const dispatch = useDispatch();
-
     const onEditClicked = () => {
     if (title && description) {
-      dispatch(announcementEdited({ ID: ann.ID, title, description }))
+      dispatch(editAnnouncement({ ID: ann.ID, title, description }))
     }
   }
 
@@ -26,4 +21,4 @@ const EditAnnouncement = (props) => {
              onBtnClicked={onEditClicked} defValueNeeded={true} title={ann.title} description={ann.description}/>
     );
 }
-export default EditAnnouncement;
+export default connect()(EditAnnouncement);

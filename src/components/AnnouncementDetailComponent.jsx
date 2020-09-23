@@ -7,14 +7,14 @@ import {FindSimilar} from '../Announcement';
 
 const mapStateToProps = (state, annId) => {
     return {
-        announcements: state.announcements
+        announcements: state
     }
 }
 
 const AnnouncementDetailComponent = ({announcements, match }) => {
 
     const { annId } = match.params;
-    const ann = announcements.find(ann => ann.ID === annId);
+    const ann = announcements.announcements.find(ann => ann.ID === annId);
     if(!ann) {
         return (
             <h4> Announcement Not Found :(</h4>
@@ -37,7 +37,7 @@ const AnnouncementDetailComponent = ({announcements, match }) => {
                 <div className="mt-5">
                     <Card className="text-center">
                         <CardHeader tag="h3" className="mb-3">Top 3 Similar Announcements</CardHeader>
-                        <FindSimilar announcements={announcements} selectedAnn={ann} />
+                        <FindSimilar announcements={announcements.announcements} selectedAnn={ann} />
                     </Card>
                 </div>
             </div>
